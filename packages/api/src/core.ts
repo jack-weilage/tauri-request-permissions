@@ -194,8 +194,11 @@ async function checkPermissions<T>(plugin: string): Promise<T> {
  *
  * This should be used by plugin authors to wrap their actual implementation.
  */
-async function requestPermissions<T>(plugin: string): Promise<T> {
-  return invoke(`plugin:${plugin}|request_permissions`)
+async function requestPermissions<T, U extends string>(
+  plugin: string,
+  permissions: U[] = []
+): Promise<T> {
+  return invoke(`plugin:${plugin}|request_permissions`, { permissions })
 }
 
 /**
